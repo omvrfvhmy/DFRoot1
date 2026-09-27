@@ -20,12 +20,11 @@ jobs:
       - name: Grant Execute Permission for Gradle
         run: chmod +x gradlew
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug
+      - name: Build Debug APK (Bypass Custom Keystore)
+        run: ./gradlew assembleDebug -Pandroid.injected.signing.store.file=""
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: android-app-apk
           path: app/build/outputs/apk/debug/*.apk
-          
